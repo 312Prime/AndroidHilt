@@ -19,12 +19,13 @@ import com.example.kotlinhilt.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class SubActivity : ComponentActivity() {
 
-    // Activity나 Fragment에서는 의존성 주입 받을때 Android KTX의 기능을 통해 주입
     private val viewModel: MainViewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             KotlinHiltTheme {
                 // A surface container using the 'background' color from the theme
@@ -33,30 +34,31 @@ class MainActivity : ComponentActivity() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    GetRepoToActivity()
-                    Button(onClick = { moveToSubActivity() }) {
-                        Text(text = "Go to SubActivity!")
+                    GetRepoToSubActivity()
+                    Button(onClick = { moveToMainActivity() }) {
+                        Text(text = "Go to MainActivity")
                     }
                 }
             }
         }
     }
 
-    // 인터페이스를 활용하지 않고 Main에 바로 ViewModel의 함수 활용
     @Composable
-    private fun GetRepoToActivity() {
+    private fun GetRepoToSubActivity() {
         Text(
-            text = viewModel.getMainName(),
+            text = viewModel.getSubName(),
             fontSize = TextUnit.Unspecified,
-            modifier = Modifier)
+            modifier = Modifier
+        )
     }
 
-    private fun moveToSubActivity() {
+    private fun moveToMainActivity() {
         applicationContext.startActivity(
             Intent(
                 applicationContext,
-                SubActivity::class.java
+                MainActivity::class.java
             ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
     }
+
 }
