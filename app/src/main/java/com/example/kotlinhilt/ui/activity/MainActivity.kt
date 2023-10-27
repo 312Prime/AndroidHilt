@@ -42,7 +42,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    // 인터페이스를 활용하지 않고 Main에 바로 ViewModel의 함수 활용
     @Composable
     private fun GetRepoToActivity() {
         Text(
