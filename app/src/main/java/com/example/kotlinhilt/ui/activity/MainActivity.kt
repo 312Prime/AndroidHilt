@@ -1,4 +1,4 @@
-package com.example.kotlinhilt
+package com.example.kotlinhilt.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
